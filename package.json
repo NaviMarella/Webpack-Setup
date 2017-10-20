@@ -1,7 +1,7 @@
 {
   "name": "Webpack-Setup",
   "version": "1.0.0",
-  "description": "\"Sample Webpack-Setup\"",
+  "description": "Sample Webpack-Setup",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,8 +11,8 @@
     "url": "git+https://github.com/NaviMarella/Webpack-Setup.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "NaviItsMe",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/NaviMarella/Webpack-Setup/issues"
   },
