@@ -1,1 +1,1 @@
-"Sample Webpack-Setup" 
+Sample Webpack-Setup 
