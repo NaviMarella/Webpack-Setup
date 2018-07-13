@@ -4,17 +4,32 @@
   "description": "Sample Webpack-Setup",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "webpack": "webpack",
+    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --mode development\"",
+    "dev": "npm run webpack -- --mode development",
+    "prod": "npm run webpack -- --mode production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NaviMarella/Webpack-Setup.git"
   },
   "keywords": [],
-  "author": "NaviItsMe",
+  "author": "NaviMarella",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/NaviMarella/Webpack-Setup/issues"
   },
-  "homepage": "https://github.com/NaviMarella/Webpack-Setup#readme"
+  "homepage": "https://github.com/NaviMarella/Webpack-Setup#readme",
+  "devDependencies": {
+    "@webpack-cli/init": "^0.0.8",
+    "error-overlay-webpack-plugin": "^0.1.5",
+    "eslint-plugin-prettier": "^2.6.2",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-html-webpack-plugin": "^0.2.3",
+    "nodemon": "^1.18.2",
+    "prettier": "^1.13.7",
+    "webpack": "^4.16.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  }
 }
