@@ -18,6 +18,7 @@
             "polyfill": false,
             "regenerator": true,
             "moduleName": "babel-runtime"
-        }]
+        }],
+        "syntax-dynamic-import"
     ]
 }

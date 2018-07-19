@@ -1,4 +1,7 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const webpack = require("webpack");
+const GitRevisionPlugin = require("git-revision-webpack-plugin");
 
 exports.devServer = ({
   host,
@@ -84,15 +87,34 @@ exports.loadImages = ({
   },
 });
 
-exports.loadJavaScript = ({ include, exclude } = {}) => ({
+exports.loadJavaScript = ({
+  include,
+  exclude
+} = {}) => ({
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        include,
-        exclude,
-        use: "babel-loader",
-      },
-    ],
+    rules: [{
+      test: /\.js$/,
+      include,
+      exclude,
+      use: "babel-loader",
+    }, ],
   },
+});
+
+exports.generateSourceMaps = ({
+  type
+}) => ({
+  devtool: type,
+});
+
+exports.clean = path => ({
+  plugins: [new CleanWebpackPlugin([path])],
+});
+
+exports.attachRevision = () => ({
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: new GitRevisionPlugin().version(),
+    }),
+  ],
 });

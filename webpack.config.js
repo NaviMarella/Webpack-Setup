@@ -4,6 +4,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const parts = require("./webpack.parts");
 
+const PATHS = {
+  app: path.join(__dirname, "src"),
+  build: path.join(__dirname, "dist"),
+};
+
 const commonConfig = merge([{
     plugins: [
       new HtmlWebpackPlugin({
@@ -22,6 +27,8 @@ const productionConfig = merge([
   parts.extractCSS({
     use: ["css-loader", parts.autoprefix()],
   }),
+  parts.attachRevision(),
+  parts.clean(PATHS.build),
   parts.loadImages({
     options: {
       limit: 15000,
@@ -30,6 +37,22 @@ const productionConfig = merge([
       outputPath: "assets"
     },
   }),
+  parts.generateSourceMaps({
+    type: "source-map"
+  }),
+  {
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendor",
+            chunks: "initial",
+          },
+        },
+      },
+    },
+  },
 ]);
 
 const developmentConfig = merge([
