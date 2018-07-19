@@ -1,3 +1,6 @@
-body{
-    background: lightgray;
+body {
+    background: cornsilk;
+    background-image: url(assets/logo.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
 }

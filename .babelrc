@@ -1,0 +1,23 @@
+{
+    "presets": [
+        [
+            "env",
+            {
+                "modules": false,
+                "development": {
+                    "plugins": [
+                        "annotate-console-log"
+                    ]
+                }
+            }
+        ]
+    ],
+    "plugins": [
+        ["transform-runtime", {
+            "helpers": false,
+            "polyfill": false,
+            "regenerator": true,
+            "moduleName": "babel-runtime"
+        }]
+    ]
+}
