@@ -2,6 +2,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
 const GitRevisionPlugin = require("git-revision-webpack-plugin");
+const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const OptimizeCSSAssetsPlugin = require(
+  "optimize-css-assets-webpack-plugin"
+);
+const cssnano = require("cssnano");
 
 exports.devServer = ({
   host,
@@ -33,7 +39,12 @@ exports.loadCSS = ({
       include,
       exclude,
 
-      use: ["style-loader", "css-loader", "sass-loader"],
+      use: ["style-loader", {
+        loader: "css-loader",
+        options: {
+          modules: true
+        }
+      }, "sass-loader"],
     }, ],
   },
 });
@@ -46,7 +57,7 @@ exports.extractCSS = ({
 }) => {
   // Output extracted CSS to a file
   const plugin = new MiniCssExtractPlugin({
-    filename: "[name].css",
+    filename: "[name].[contenthash:4].css",
   });
 
   return {
@@ -118,3 +129,31 @@ exports.attachRevision = () => ({
     }),
   ],
 });
+
+exports.minifyJavaScript = () => ({
+  optimization: {
+    minimizer: [new UglifyWebpackPlugin({
+      sourceMap: true
+    })],
+  },
+});
+
+exports.minifyCSS = ({
+  options
+}) => ({
+  plugins: [
+    new OptimizeCSSAssetsPlugin({
+      cssProcessor: cssnano,
+      cssProcessorOptions: options,
+      canPrint: false,
+    }),
+  ],
+});
+
+exports.analyzeBuild = ({
+  options
+} = {}) => ({
+  plugins: [
+    new BundleAnalyzerPlugin()
+  ]
+})
