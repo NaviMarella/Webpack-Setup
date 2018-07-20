@@ -23,16 +23,23 @@ const commonConfig = merge([{
 ]);
 
 
-const productionConfig = merge([
+const productionConfig = merge([{
+    output: {
+      chunkFilename: "[name].[chunkhash:4].js",
+      filename: "[name].[chunkhash:4].js",
+      publicPath: "/webpack-demo/",
+    },
+  },
   parts.extractCSS({
     use: ["css-loader", parts.autoprefix()],
   }),
   parts.attachRevision(),
+  parts.minifyJavaScript(),
   parts.clean(PATHS.build),
   parts.loadImages({
     options: {
       limit: 15000,
-      name: "[name].[ext]",
+      name: "[name].[hash:4].[ext]",
       fallback: "file-loader",
       outputPath: "assets"
     },
@@ -51,6 +58,29 @@ const productionConfig = merge([
           },
         },
       },
+      runtimeChunk: {
+        name: "manifest",
+      },
+    },
+  },
+  {
+    performance: {
+      hints: "warning",
+      maxEntrypointSize: 50000, // in bytes, default 250k
+      maxAssetSize: 15000,
+    },
+  },
+  parts.minifyCSS({
+    options: {
+      discardComments: {
+        removeAll: true,
+      }
+    },
+  }),
+  parts.analyzeBuild(),
+  {
+    resolve: {
+      extensions: [".js", ".json", ".jsx"],
     },
   },
 ]);

@@ -1,3 +1,5 @@
+import styles from './main.css';
+
 const HelloWorld = (text = "Hello World") => {
     const elm = document.createElement("dic");
     elm.innerHTML = text;
@@ -8,7 +10,7 @@ const HelloWorld = (text = "Hello World") => {
         }).catch(err => {
             console.log(err);
         });
-
+    elm.className = styles.redButton;
     return elm;
 }
 
