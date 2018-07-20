@@ -156,4 +156,12 @@ exports.analyzeBuild = ({
   plugins: [
     new BundleAnalyzerPlugin()
   ]
-})
+});
+
+exports.scopeHoistModules = ({
+  options
+} = {}) => ({
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin()
+  ]
+});

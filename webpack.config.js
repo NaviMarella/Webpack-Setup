@@ -83,6 +83,7 @@ const productionConfig = merge([{
       extensions: [".js", ".json", ".jsx"],
     },
   },
+  parts.scopeHoistModules()
 ]);
 
 const developmentConfig = merge([
