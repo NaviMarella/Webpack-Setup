@@ -8,7 +8,10 @@
     "start": "webpack-dev-server --env.mode development --display-error-details",
     "build": "webpack --env.mode production",
     "deploy": "gh-pages -d build",
-    "build:stats": "webpack --env production --json > stats.json"
+    "build:stats": "webpack --env production --json > stats.json",
+    "debug": "node --inspect --debug-brk ./node_modules/webpack/bin/webpack.js",
+    "prod:debug": "npm run debug -- --mode production",
+    "dev:debug": "npm run debug -- --mode development"
   },
   "repository": {
     "type": "git",
