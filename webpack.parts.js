@@ -119,7 +119,9 @@ exports.generateSourceMaps = ({
 });
 
 exports.clean = path => ({
-  plugins: [new CleanWebpackPlugin([path])],
+  plugins: [new CleanWebpackPlugin([path], {
+    allowExternal: true
+  })],
 });
 
 exports.attachRevision = () => ({
