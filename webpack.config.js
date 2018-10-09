@@ -14,6 +14,8 @@ const commonConfig = merge([{
       new HtmlWebpackPlugin({
         title: "Webpack demo",
       }),
+      // Adding this plugin to achieve scope hoisting for modules
+      new webpack.optimize.ModuleConcatenationPlugin()
     ],
   },
   parts.loadCSS(),
