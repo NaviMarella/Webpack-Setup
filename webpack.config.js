@@ -1,3 +1,5 @@
+//@ts-check
+
 const path = require("path");
 const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -96,7 +98,7 @@ const developmentConfig = merge([
   parts.loadImages()
 ]);
 
-
+/** @type webpack.Configuration */
 module.exports = ({
   mode
 }) => {
